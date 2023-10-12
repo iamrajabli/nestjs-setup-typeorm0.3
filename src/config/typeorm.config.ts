@@ -6,6 +6,7 @@ export const typeOrmConfig = async (
 	configService: ConfigService,
 ): Promise<PostgresConnectionOptions> => {
 	return {
+		migrations: [join(__dirname, '..', 'db/migrations/**/*{.js,.ts}')],
 		entities: [join(__dirname, '..', '/**/*.entity{.js,.ts}')],
 		host: configService.get('DB_HOST'),
 		type: configService.get('DB_TYPE'),
@@ -13,6 +14,6 @@ export const typeOrmConfig = async (
 		password: configService.get('DB_PASSWORD'),
 		port: configService.get('DB_PORT'),
 		database: configService.get('DB_DATABASE'),
-		synchronize: true,
+		synchronize: false,
 	};
 };
